@@ -6,9 +6,9 @@
 #include "Camera/CameraComponent.h"
 #include "DrawDebugHelpers.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "SInteractionComponent.h"
-#include "SAttributeComponent.h"
-#include "SActionComponent.h"
+#include "Components/SInteractionComponent.h"
+#include "Components/SAttributeComponent.h"
+#include "Components/SActionComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "ActionRoguelike.h"
 #include "Logging/StructuredLog.h"
@@ -17,7 +17,7 @@
 // Enhanced Input
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "SPlayerController.h"
+#include "GameFramework/SPlayerController.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SCharacter)
 
@@ -97,9 +97,9 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	InputComp->BindAction(Input_Sprint, ETriggerEvent::Started, this, &ASCharacter::SprintStart);
 	InputComp->BindAction(Input_Sprint, ETriggerEvent::Completed, this, &ASCharacter::SprintStop);
 
-	// MKB
+	// 鼠标
 	InputComp->BindAction(Input_LookMouse, ETriggerEvent::Triggered, this, &ASCharacter::LookMouse);
-	// Gamepad
+	// 手柄
 	InputComp->BindAction(Input_LookStick, ETriggerEvent::Triggered, this, &ASCharacter::LookStick);
 
 	// Abilities
@@ -172,7 +172,7 @@ void ASCharacter::Move(const FInputActionInstance& Instance)
 	ControlRot.Pitch = 0.0f;
 	ControlRot.Roll = 0.0f;
 
-	// Get value from input (combined value from WASD keys or single Gamepad stick) and convert to Vector (x,y)
+	// 从输入中获取值（WASD 键的组合值或单个游戏手柄摇杆的值）并转换为向量 (x,y)
 	const FVector2D AxisValue = Instance.GetValue().Get<FVector2D>();
 
 	// Move forward/back
@@ -182,7 +182,7 @@ void ASCharacter::Move(const FInputActionInstance& Instance)
 	const FVector RightVector = FRotationMatrix(ControlRot).GetScaledAxis(EAxis::Y);
 	AddMovementInput(RightVector, AxisValue.X);
 
-	// Alternative Copied from Lyra
+	// 替代方案借鉴自 Lyra
 	/*
 	{
 		const FRotator MovementRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f);

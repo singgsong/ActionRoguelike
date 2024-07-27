@@ -11,16 +11,10 @@
 UENUM(BlueprintType)
 enum class ESignificanceValue : uint8
 {
-	// Special tier while owning Actor is hidden
-	Hidden = 0, 
-	// Assumed very far away
-	Lowest = 1, 
-	// no longer critical
-	Medium = 2,
-	// Max fidelity, No throttling/culling
-	Highest = 3,
-	// not yet defined, good starting position
-	Invalid = UINT8_MAX 
+	Hidden = 0, // Special tier while owning Actor is hidden ingame
+	Lowest = 1, // Assumed very far away
+	Medium = 2, // no longer critical
+	Highest = 3 // No stripping/culling
 };
 
 // Trigger only when significance has changed
@@ -48,14 +42,10 @@ struct FSignificanceDistance
 	UPROPERTY(EditAnywhere, meta = (UIMin=1000.0, UIMax=50000))
 	float MaxDistance;
 
-	float GetMaxDistSqrd() const { return MaxDistance*MaxDistance; }
+	float GetMaxDistSqrd() const { return MaxDistance*MaxDistance;}
 };
 
-/*
- * Significance Component made entirely for convenience and classes that don't have a C++ Actor base class.
- * To squeeze max. perf out of signifance you may want to skip this component and directly implement the Significance directly as this component essentially demonstrates how.
- * See: RegisterWithManager() on which functions are required to hook yourself up with SignifanceManager.
- */
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), HideCategories=("Collision", "Tags", "ComponentTick", "ComponentReplication", "Cooking", "Activation", "AssetUserData") )
 class ACTIONROGUELIKE_API USSignificanceComponent : public UActorComponent
 {
@@ -84,7 +74,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Optimization")
 	bool bInsignificantWhenOwnerIsHidden;
 	
-	/* Delay registration by one tick to allow actors/components to tick once, this may be useful to have them setup VFX beams etc. before pausing them due to low significance */
+	/* Delay registration by one tick to allow actors/components to tick once, this may be useful to have them setup VFX beams etc. */
 	UPROPERTY(EditDefaultsOnly, Category = "Optimization")
 	bool bWaitOneFrame;
 

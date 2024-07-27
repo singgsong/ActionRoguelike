@@ -2,7 +2,7 @@
 
 
 #include "AI/SBTTask_HealSelf.h"
-#include "SAttributeComponent.h"
+#include "Components/SAttributeComponent.h"
 #include "AIController.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SBTTask_HealSelf)

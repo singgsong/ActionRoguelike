@@ -3,7 +3,7 @@
 
 #include "SAnimInstance.h"
 #include "GameplayTagContainer.h"
-#include "SActionComponent.h"
+#include "Components/SActionComponent.h"
 #include "SharedGameplayTags.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SAnimInstance)

@@ -3,7 +3,7 @@
 
 #include "AI/BTTask_StartAction.h"
 #include "AIController.h"
-#include "SActionComponent.h"
+#include "Components/SActionComponent.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(BTTask_StartAction)
 

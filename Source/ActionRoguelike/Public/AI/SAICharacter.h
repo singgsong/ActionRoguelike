@@ -3,12 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/SSignificanceComponent.h"
 #include "GameFramework/Character.h"
 #include "SAICharacter.generated.h"
 
 
-class USSignificanceComponent;
 class UPawnSensingComponent;
 class USAttributeComponent;
 class UUserWidget;
@@ -19,6 +17,10 @@ UCLASS()
 class ACTIONROGUELIKE_API ASAICharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+public:
+
+	ASAICharacter();
 
 protected:
 
@@ -50,6 +52,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "AI")
 	AActor* GetTargetActor() const;
 
+	virtual void PostInitializeComponents() override;
+
 	UFUNCTION()
 	void OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComp, float NewHealth, float Delta);
 
@@ -62,23 +66,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USActionComponent> ActionComp;
 
-	/* Handle fidelity for AI as they are off-screen or at far distances */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<USSignificanceComponent> SigManComp;
-
-	UFUNCTION()
-	void OnSignificanceChanged(ESignificanceValue Significance);
-
 	UFUNCTION()
 	void OnPawnSeen(APawn* Pawn);
 
 	UFUNCTION(NetMulticast, Unreliable)
 	void MulticastPawnSeen();
-	
-public:
-
-	virtual void PostInitializeComponents() override;
-
-	ASAICharacter();
-
 };

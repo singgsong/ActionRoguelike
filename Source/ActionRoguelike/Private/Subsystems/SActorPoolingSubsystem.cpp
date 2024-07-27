@@ -4,7 +4,7 @@
 #include "Subsystems/SActorPoolingSubsystem.h"
 
 #include "ActionRoguelike.h"
-#include "SActorPoolingInterface.h"
+#include "Interfaces/SActorPoolingInterface.h"
 #include "Logging/StructuredLog.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SActorPoolingSubsystem)
